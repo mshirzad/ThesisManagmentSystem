@@ -1,0 +1,449 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Home</title>
+
+    <link
+      rel="shortcut icon"
+      href="{% static 'main/images/logo.png' %}"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'main/css/bootstrap/bootstrap.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'main/css/loading_animation.css' %}"
+    />
+    <script src="{% static 'main/js/jquery.js' %}" defer></script>
+    <script
+      src="{% static 'main/js/bootstrap/bootstrap.min.js' %}"
+      defer
+    ></script>
+
+    <script src="{% static 'main/js/add_record.js' %}" defer></script>
+  </head>
+
+  <body>
+    <header
+      class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow"
+    >
+      <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#"
+        >Thesis Management System</a
+      >
+      <input
+        class="form-control form-control-dark w-100"
+        type="text"
+        placeholder="Search by monograph title ..."
+        aria-label="Search"
+      />
+      <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+          <a class="nav-link" href="logout/">Logout</a>
+        </li>
+      </ul>
+    </header>
+    <div class="container" id="animation-container">
+      <div class="lds-hourglass"></div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <main class="col-md-12 ms-sm-auto col-lg-12 px-md-4" id="main-tag">
+          <div
+            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+          >
+            <h1 class="h2">Add New Record</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+              <div class="btn-group me-2">
+                <a
+                  href="{% url 'home' %}"
+                  class="btn btn-sm btn-outline-secondary"
+                >
+                  Show All Records
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {% comment %} form here {% endcomment %}
+          <div
+            class="alert alert-danger"
+            role="alert"
+            style="display: none"
+            id="DBErrorAlertBox"
+          ></div>
+          <div
+            class="alert alert-danger"
+            role="alert"
+            style="display: none"
+            id="errorAlertBox"
+          ></div>
+          <div
+            class="alert alert-warning"
+            role="alert"
+            style="display: none"
+            id="warningBox"
+          ></div>
+          <div
+            class="alert alert-success"
+            role="alert"
+            style="display: none"
+            id="successAlertBox"
+          ></div>
+          <!-- Start Card -->
+          <div class="card">
+            <!-- Start Card Body -->
+            <div class="card-body">
+              <!-- Start Form -->
+
+              <form
+                id="m_form"
+                action="#"
+                method=""
+                class="has-validation"
+                novalidate
+                autocomplete="off"
+              >
+                <!-- Start Input title -->
+                <div class="form-group">
+                  <label for="m_title">Title</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="m_title"
+                    name="m_title"
+                    placeholder="Monograph Title"
+                    required
+                  />
+
+                  <small class="form-text text-muted"
+                    >Please fill Monograph Title</small
+                  >
+                </div>
+                <!-- End Inptitle -->
+
+                <div class="row">
+                  <!-- Start Input Department -->
+                  <div class="form-group col-md-4">
+                    <label>Department</label>
+                    <div
+                      class="d-flex flex-row justify-content-between align-items-center"
+                    >
+                      <select
+                        class="form-control mr-1"
+                        id="department"
+                        name="department"
+                        required
+                      >
+                        <option value="SE" selected>
+                          Software Engineering
+                        </option>
+                        <option value="IT">Information Technology</option>
+                        <option value="IS">Information System</option>
+                      </select>
+                    </div>
+                  </div>
+                  <!-- End Input department -->
+
+                  <!-- Start Input year -->
+                  <div class="form-group col-md-4">
+                    <label>Year</label>
+                    <div
+                      class="d-flex flex-row justify-content-between align-items-center"
+                    >
+                      <select
+                        class="form-control mr-1"
+                        id="year"
+                        name="year"
+                        required
+                      >
+                        <option value="1399">1399</option>
+                        <option value="1400">1400</option>
+                        <option value="1401" selected>1401</option>
+                        <option value="1400">1400</option>
+                        <option value="1402">1402</option>
+                        <option value="1403">1403</option>
+                        <option value="1404">1404</option>
+                        <option value="1405">1405</option>
+                        <option value="1406">1406</option>
+                        <option value="1407">1407</option>
+                        <option value="1408">1408</option>
+                        <option value="1409">1409</option>
+                        <option value="1410">1410</option>
+                      </select>
+                    </div>
+                  </div>
+                  <!-- End Input year -->
+
+                  <!-- Start Input m_languege -->
+                  <div class="form-group col-md-4">
+                    <label>Monograph Language</label>
+                    <div
+                      class="d-flex flex-row justify-content-between align-items-center"
+                    >
+                      <select
+                        class="form-control mr-1"
+                        id="m_language"
+                        name="m_language"
+                        required
+                      >
+                        <option value="EN" selected>English</option>
+                        <option value="FA">Farsi</option>
+                        <option value="PA">Pashto</option>
+                      </select>
+                    </div>
+                  </div>
+                  <!-- End Input m_languege -->
+                </div>
+                {% comment %} {% comment %}
+                <div class="input-group mt-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Upload Monograph File</span>
+                  </div>
+                  <div class="custom-file">
+                    <input
+                      type="file"
+                      class="custom-file-input form-control btn btn-sm btn-outline-secondary"
+                      id="m_file"
+                      name="m_file"
+                      required
+                      aria-describedby="inputGroupFileAddon01"
+                      placeholder="Choose File"
+                    />
+                    <label class="custom-file-label" for="m_file"
+                      >Choose file</label
+                    >
+                  </div>
+                </div>
+                {% endcomment %}
+                <div class="input-group mt-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Upload Monograph File</span>
+                  </div>
+                  <input
+                    type="file"
+                    class="form-control btn btn-sm border"
+                    id="m_file"
+                    name="m_file"
+                    required
+                    aria-describedby="inputGroupFileAddon01"
+                    placeholder="Choose File"
+                  />
+                </div>
+                <div>
+                  <small class="form-text text-muted mb-3"
+                    >Please Upload Monograph File (.pdf only)</small
+                  >
+                </div>
+
+                {% comment %}
+                <div class="input-group mt-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      >Upload Source Code File</span
+                    >
+                  </div>
+                  <div class="custom-file">
+                    <input
+                      type="file"
+                      class="custom-file-input"
+                      id="source_code_file"
+                      name="source_code_file"
+                      aria-describedby="inputGroupFileAddon01"
+                    />
+                    <label class="custom-file-label" for="source_code_file"
+                      >Choose file</label
+                    >
+                  </div>
+                </div>
+                {% endcomment %}
+                <div class="input-group mt-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      >Upload Source Code File</span
+                    >
+                  </div>
+                  <input
+                    type="file"
+                    class="form-control btn btn-sm border"
+                    id="source_code_file"
+                    name="source_code_file"
+                    aria-describedby="inputGroupFileAddon01"
+                  />
+                </div>
+                <div>
+                  <small class="form-text text-muted mb-5"
+                    >Please Upload Source Code File (.zip or .rar only)</small
+                  >
+                </div>
+                <!-- Start Student Info -->
+                <div class="form-group">
+                  <label class="font-weight-bold">* Student #1 Info</label>
+                </div>
+                <div class="row g-3">
+                  <div class="col">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="s1_sID"
+                      name="s1_sID"
+                      placeholder="KU ID#"
+                      required
+                    />
+                  </div>
+                  <div class="col">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="s1_name"
+                      name="s1_name"
+                      placeholder="First Name"
+                      required
+                    />
+                  </div>
+                  <div class="col">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="s1_father_name"
+                      name="s1_father_name"
+                      placeholder="Father Name"
+                      required
+                    />
+                  </div>
+                  <div class="col">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="s1_last_name"
+                      name="s1_last_name"
+                      placeholder="Last Name"
+                      required
+                    />
+                  </div>
+                </div>
+                <!-- End Student Info -->
+                <!-- Start Student Info -->
+                <div class="form-group mt-5">
+                  <label class="font-weight-bold"
+                    >Student #2 Info
+                    <small class="form-text text-muted"
+                      >(Optional)</small
+                    ></label
+                  >
+                </div>
+                <div class="row g-3">
+                  <div class="col">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="s2_sID"
+                      name="s2_sID"
+                      placeholder="KU ID#"
+                    />
+                  </div>
+                  <div class="col">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="s2_name"
+                      name="s2_name"
+                      placeholder="First Name"
+                    />
+                  </div>
+                  <div class="col">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="s2_father_name"
+                      name="s2_father_name"
+                      placeholder="Father Name"
+                    />
+                  </div>
+                  <div class="col">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="s2_last_name"
+                      name="s2_last_name"
+                      placeholder="Last Name"
+                    />
+                  </div>
+                </div>
+                <!-- End Student Info -->
+                <!-- Start Student Info -->
+                <div class="form-group mt-5">
+                  <label class="font-weight-bold"
+                    >Student #3 Info
+                    <small class="form-text text-muted"
+                      >(Optional)</small
+                    ></label
+                  >
+                </div>
+                <div class="row g-3">
+                  <div class="col">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="s3_sID"
+                      name="s3_sID"
+                      placeholder="KU ID#"
+                    />
+                  </div>
+                  <div class="col">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="s3_name"
+                      name="s3_name"
+                      placeholder="First Name"
+                    />
+                  </div>
+                  <div class="col">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="s3_father_name"
+                      name="s3_father_name"
+                      placeholder="Father Name"
+                    />
+                  </div>
+                  <div class="col">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="s3_last_name"
+                      name="s3_last_name"
+                      placeholder="Last Name"
+                    />
+                  </div>
+                </div>
+                <!-- End Student Info -->
+                <!-- Start Add Record Button -->
+
+                <button
+                  class="btn btn-primary btn-block col-lg-2 mt-5"
+                  id="add-btn"
+                  type="button"
+                >
+                  Add Record
+                </button>
+
+                <!-- End Add Record Button -->
+              </form>
+              <!-- End Form -->
+            </div>
+            <!-- End Card Body -->
+          </div>
+          <!-- End Card -->
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

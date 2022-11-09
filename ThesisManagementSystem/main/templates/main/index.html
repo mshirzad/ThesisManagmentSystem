@@ -1,0 +1,154 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Home</title>
+
+    <link
+      rel="shortcut icon"
+      href="{% static 'main/images/logo.png' %}"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'main/css/bootstrap/bootstrap.min.css' %}"
+    />
+
+    <link rel="stylesheet" href="{% static 'main/css/index.css' %}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'main/css/jquery.modal.min.css' %}"
+    />
+
+    <script src="{% static 'main/js/show_record.js' %}" defer></script>
+
+    <script src="{% static 'main/js/jquery.js' %}" defer></script>
+    <script
+      src="{% static 'main/js/bootstrap/bootstrap.min.js' %}"
+      defer
+    ></script>
+
+    <script src="{% static 'main/js/jquery.modal.min.js' %}" defer></script>
+    <script src="{% static 'main/js/index.js' %}" defer></script>
+  </head>
+  <body>
+    <header
+      class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow"
+    >
+      <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#"
+        >Thesis Management System</a
+      >
+      <input
+        class="form-control form-control-dark w-100"
+        type="text"
+        placeholder="Search by monograph title ..."
+        aria-label="Search"
+        id="search-key"
+        oninput="searchLive()"
+      />
+      <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+          <a class="nav-link" href="logout/">Logout</a>
+        </li>
+      </ul>
+    </header>
+
+    <div class="container-fluid">
+      <div class="row">
+        <main class="col-md-12 ms-sm-auto col-lg-12 px-md-4">
+          <div
+            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+          >
+            <h1 class="h2">All Records</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+              <div class="btn-group me-2">
+                <a
+                  href="{% url 'addNewRecord' %}"
+                  class="btn btn-sm btn-outline-secondary"
+                >
+                  Add New Record
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-striped table-sm" id="records-table">
+              <thead>
+                <tr>
+                  <th style="width: 600px; max-width: 600px">Filters</th>
+                  <th style="width: 150px; max-width: 150px">
+                    <select id="date-dropdown" class="form-control mr-1">
+                      <option value="1399">1399</option>
+                      <option value="1400">1400</option>
+                      <option value="1401" selected>1401</option>
+                      <option value="1400">1400</option>
+                      <option value="1402">1402</option>
+                      <option value="1403">1403</option>
+                      <option value="1404">1404</option>
+                      <option value="1405">1405</option>
+                      <option value="1406">1406</option>
+                      <option value="1407">1407</option>
+                      <option value="1408">1408</option>
+                      <option value="1409">1409</option>
+                      <option value="1410">1410</option>
+                    </select>
+                  </th>
+                  <th style="width: 150px; max-width: 150px">
+                    <select
+                      name="department"
+                      id="department"
+                      class="form-control mr-1"
+                    >
+                      <option value="SE">SE</option>
+                      <option value="IT">IT</option>
+                      <option value="IS">IS</option>
+                    </select>
+                  </th>
+                  <th style="width: 150px; max-width: 150px">
+                    <select
+                      name="langDropdown"
+                      id="langDropdown"
+                      class="form-control mr-1"
+                    >
+                      <option value="EN">EN</option>
+                      <option value="FA">FA</option>
+                      <option value="PS">PS</option>
+                    </select>
+                  </th>
+                  <th class="pl-4" style="width: 150px; max-width: 150px"></th>
+                  <th class="pl-5" style="width: 150px; max-width: 150px"></th>
+                </tr>
+                <tr>
+                  {% comment %}
+                  <th>Monograph ID</th>
+                  {% endcomment %}
+                  <th style="width: 600px; max-width: 600px">Title</th>
+                  <th style="width: 150px; max-width: 150px">Year</th>
+                  <th style="width: 150px; max-width: 150px">Department</th>
+                  <th style="width: 150px; max-width: 150px">Language</th>
+                  <th class="pl-4" style="width: 200px; max-width: 200px">
+                    View Record
+                  </th>
+                  <th class="pl-5" style="width: 200px; max-width: 200px">
+                    Open File
+                  </th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- View Record Modal HTML embedded directly into document -->
+    <div id="viewRecordModal" class="modal">
+      <p>Error Loading Popup</p>
+
+      <a href="#" rel="modal:close">Close</a>
+    </div>
+  </body>
+</html>
