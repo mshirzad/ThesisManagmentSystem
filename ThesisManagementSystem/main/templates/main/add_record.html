@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Home</title>
+    <title class="langAddrecord">Add New Record</title>
 
     <link
       rel="shortcut icon"
@@ -33,18 +33,18 @@
     <header
       class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow"
     >
-      <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#"
+      <a class="LangThesis navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/"
         >Thesis Management System</a
       >
       <input
-        class="form-control form-control-dark w-100"
+        class="langSearch form-control form-control-dark w-100"
         type="text"
         placeholder="Search by monograph title ..."
         aria-label="Search"
       />
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-          <a class="nav-link" href="logout/">Logout</a>
+          <a class="langlogout nav-link" href="logout/">Logout</a>
         </li>
       </ul>
     </header>
@@ -58,12 +58,12 @@
           <div
             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
           >
-            <h1 class="h2">Add New Record</h1>
+            <h1 class="langAddrecord2 h 2">Add New Record</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group me-2">
                 <a
                   href="{% url 'home' %}"
-                  class="btn btn-sm btn-outline-secondary"
+                  class="langAllrecord btn btn-sm btn-outline-secondary"
                 >
                   Show All Records
                 </a>
@@ -112,17 +112,17 @@
               >
                 <!-- Start Input title -->
                 <div class="form-group">
-                  <label for="m_title">Title</label>
+                  <label class="Langtitle" for="m_title">Title</label>
                   <input
                     type="text"
-                    class="form-control"
+                    class="langMonoTitle form-control"
                     id="m_title"
                     name="m_title"
                     placeholder="Monograph Title"
                     required
                   />
 
-                  <small class="form-text text-muted"
+                  <small class="langMsg form-text text-muted"
                     >Please fill Monograph Title</small
                   >
                 </div>
@@ -131,7 +131,7 @@
                 <div class="row">
                   <!-- Start Input Department -->
                   <div class="form-group col-md-4">
-                    <label>Department</label>
+                    <label class="langDep">Department</label>
                     <div
                       class="d-flex flex-row justify-content-between align-items-center"
                     >
@@ -141,11 +141,15 @@
                         name="department"
                         required
                       >
-                        <option value="SE" selected>
+                        <option class="langSE" value="SE" selected>
                           Software Engineering
                         </option>
-                        <option value="IT">Information Technology</option>
-                        <option value="IS">Information System</option>
+                        <option class="langIT" value="IT">
+                          Information Technology
+                        </option>
+                        <option class="langIS" value="IS">
+                          Information System
+                        </option>
                       </select>
                     </div>
                   </div>
@@ -153,7 +157,7 @@
 
                   <!-- Start Input year -->
                   <div class="form-group col-md-4">
-                    <label>Year</label>
+                    <label class="LangYear">Year</label>
                     <div
                       class="d-flex flex-row justify-content-between align-items-center"
                     >
@@ -183,7 +187,7 @@
 
                   <!-- Start Input m_languege -->
                   <div class="form-group col-md-4">
-                    <label>Monograph Language</label>
+                    <label class="LangMonoLang">Monograph Language</label>
                     <div
                       class="d-flex flex-row justify-content-between align-items-center"
                     >
@@ -193,42 +197,47 @@
                         name="m_language"
                         required
                       >
-                        <option value="EN" selected>English</option>
-                        <option value="FA">Farsi</option>
-                        <option value="PA">Pashto</option>
+                        <option class="langEN" value="EN" selected>
+                          English
+                        </option>
+                        <option class="langFA" value="FA">Farsi</option>
+                        <option class="langPS" value="PA">Pashto</option>
                       </select>
                     </div>
                   </div>
                   <!-- End Input m_languege -->
                 </div>
-                {% comment %} {% comment %}
-                <div class="input-group mt-3">
+                <!-- {% comment %} {% comment %} -->
+                <!-- <div class="input-group mt-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text">Upload Monograph File</span>
+                    <span class="langupfile
+                    input-group-text">Upload Monograph File</span>
                   </div>
                   <div class="custom-file">
                     <input
                       type="file"
-                      class="custom-file-input form-control btn btn-sm btn-outline-secondary"
+                      class="langbrowse custom-file-input form-control btn btn-sm btn-outline-secondary"
                       id="m_file"
                       name="m_file"
                       required
                       aria-describedby="inputGroupFileAddon01"
                       placeholder="Choose File"
                     />
-                    <label class="custom-file-label" for="m_file"
+                    <label class="langChoose custom-file-label" for="m_file"
                       >Choose file</label
                     >
                   </div>
                 </div>
-                {% endcomment %}
+                {% endcomment %} -->
                 <div class="input-group mt-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text">Upload Monograph File</span>
+                    <span class="langsource input-group-text"
+                      >Upload Monograph File</span
+                    >
                   </div>
                   <input
                     type="file"
-                    class="form-control btn btn-sm border"
+                    class="langbrowse form-control btn btn-sm border"
                     id="m_file"
                     name="m_file"
                     required
@@ -237,15 +246,15 @@
                   />
                 </div>
                 <div>
-                  <small class="form-text text-muted mb-3"
+                  <small class="langpdf form-text text-muted mb-3"
                     >Please Upload Monograph File (.pdf only)</small
                   >
                 </div>
 
-                {% comment %}
+                <!-- {% comment %}
                 <div class="input-group mt-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text"
+                    <span class="langsrc input-group-text"
                       >Upload Source Code File</span
                     >
                   </div>
@@ -257,15 +266,15 @@
                       name="source_code_file"
                       aria-describedby="inputGroupFileAddon01"
                     />
-                    <label class="custom-file-label" for="source_code_file"
+                    <label class="langChoose custom-file-label" for="source_code_file"
                       >Choose file</label
                     >
                   </div>
                 </div>
-                {% endcomment %}
+                {% endcomment %} -->
                 <div class="input-group mt-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text"
+                    <span class="langsrc input-group-text"
                       >Upload Source Code File</span
                     >
                   </div>
@@ -278,19 +287,21 @@
                   />
                 </div>
                 <div>
-                  <small class="form-text text-muted mb-5"
+                  <small class="langsourcefile form-text text-muted mb-5"
                     >Please Upload Source Code File (.zip or .rar only)</small
                   >
                 </div>
                 <!-- Start Student Info -->
                 <div class="form-group">
-                  <label class="font-weight-bold">* Student #1 Info</label>
+                  <label class="langstd1 font-weight-bold"
+                    >* Student #1 Info</label
+                  >
                 </div>
                 <div class="row g-3">
                   <div class="col">
                     <input
+                      class="langKUID form-control"
                       type="text"
-                      class="form-control"
                       id="s1_sID"
                       name="s1_sID"
                       placeholder="KU ID#"
@@ -300,7 +311,7 @@
                   <div class="col">
                     <input
                       type="text"
-                      class="form-control"
+                      class="langFname form-control"
                       id="s1_name"
                       name="s1_name"
                       placeholder="First Name"
@@ -310,7 +321,7 @@
                   <div class="col">
                     <input
                       type="text"
-                      class="form-control"
+                      class="langfather form-control"
                       id="s1_father_name"
                       name="s1_father_name"
                       placeholder="Father Name"
@@ -320,7 +331,7 @@
                   <div class="col">
                     <input
                       type="text"
-                      class="form-control"
+                      class="langLast form-control"
                       id="s1_last_name"
                       name="s1_last_name"
                       placeholder="Last Name"
@@ -331,9 +342,9 @@
                 <!-- End Student Info -->
                 <!-- Start Student Info -->
                 <div class="form-group mt-5">
-                  <label class="font-weight-bold"
+                  <label class="langstd2 font-weight-bold"
                     >Student #2 Info
-                    <small class="form-text text-muted"
+                    <small class="langoptional form-text text-muted"
                       >(Optional)</small
                     ></label
                   >
@@ -342,7 +353,7 @@
                   <div class="col">
                     <input
                       type="text"
-                      class="form-control"
+                      class="langKUID form-control"
                       id="s2_sID"
                       name="s2_sID"
                       placeholder="KU ID#"
@@ -351,7 +362,7 @@
                   <div class="col">
                     <input
                       type="text"
-                      class="form-control"
+                      class="langFname form-control"
                       id="s2_name"
                       name="s2_name"
                       placeholder="First Name"
@@ -360,7 +371,7 @@
                   <div class="col">
                     <input
                       type="text"
-                      class="form-control"
+                      class="langfather form-control"
                       id="s2_father_name"
                       name="s2_father_name"
                       placeholder="Father Name"
@@ -369,7 +380,7 @@
                   <div class="col">
                     <input
                       type="text"
-                      class="form-control"
+                      class="langLast form-control"
                       id="s2_last_name"
                       name="s2_last_name"
                       placeholder="Last Name"
@@ -379,9 +390,9 @@
                 <!-- End Student Info -->
                 <!-- Start Student Info -->
                 <div class="form-group mt-5">
-                  <label class="font-weight-bold"
+                  <label class="langstd3 font-weight-bold"
                     >Student #3 Info
-                    <small class="form-text text-muted"
+                    <small class="langoptional form-text text-muted"
                       >(Optional)</small
                     ></label
                   >
@@ -390,7 +401,7 @@
                   <div class="col">
                     <input
                       type="text"
-                      class="form-control"
+                      class="langKUID form-control"
                       id="s3_sID"
                       name="s3_sID"
                       placeholder="KU ID#"
@@ -399,7 +410,7 @@
                   <div class="col">
                     <input
                       type="text"
-                      class="form-control"
+                      class="langFname form-control"
                       id="s3_name"
                       name="s3_name"
                       placeholder="First Name"
@@ -408,7 +419,7 @@
                   <div class="col">
                     <input
                       type="text"
-                      class="form-control"
+                      class="langfather form-control"
                       id="s3_father_name"
                       name="s3_father_name"
                       placeholder="Father Name"
@@ -417,7 +428,7 @@
                   <div class="col">
                     <input
                       type="text"
-                      class="form-control"
+                      class="langLast form-control"
                       id="s3_last_name"
                       name="s3_last_name"
                       placeholder="Last Name"
@@ -428,7 +439,7 @@
                 <!-- Start Add Record Button -->
 
                 <button
-                  class="btn btn-primary btn-block col-lg-2 mt-5"
+                  class="langRec btn btn-primary btn-block col-lg-2 mt-5"
                   id="add-btn"
                   type="button"
                 >
@@ -445,5 +456,151 @@
         </main>
       </div>
     </div>
+    <script>
+      const langAddrecord = document.querySelector(".langAddrecord");
+      const LangThesis = document.querySelector(".LangThesis");
+      const langSearch = document.querySelector(".langSearch");
+      const langAddrecord2 = document.querySelector(".langAddrecord2");
+      const langAllrecord = document.querySelector(".langAllrecord");
+      const Langtitle = document.querySelector(".Langtitle");
+      const langMonoTitle = document.querySelector(".langMonoTitle");
+      const langMsg = document.querySelector(".langMsg");
+      const langDep = document.querySelector(".langDep");
+      const langSE = document.querySelector(".langSE");
+      const langIT = document.querySelector(".langIT");
+      const langIS = document.querySelector(".langIS");
+      const LangYear = document.querySelector(".LangYear");
+      const LangMonoLang = document.querySelector(".LangMonoLang");
+      const langEN = document.querySelector(".langEN");
+      const langFA = document.querySelector(".langFA");
+      const langPS = document.querySelector(".langPS");
+      const langupfile = document.querySelector(".langupfile");
+      const langchoose = document.querySelectorAll(".langChoose");
+      const langpdf = document.querySelector(".langpdf");
+      const langsource = document.querySelector(".langsource");
+      const langsourcefile = document.querySelector(".langsourcefile");
+      const langstd1 = document.querySelector(".langstd1");
+      const langKUID = document.querySelectorAll(".langKUID");
+      const langFname = document.querySelectorAll(".langFname");
+      const langfather = document.querySelectorAll(".langfather");
+      const langLast = document.querySelectorAll(".langLast");
+      const langRec = document.querySelector(".langRec");
+      const langoptional = document.querySelectorAll(".langoptional");
+      const langstd2 = document.querySelector(".langstd2");
+      const langstd3 = document.querySelector(".langstd3");
+      const langlogout = document.querySelector(".langlogout");
+      const langbrowse = document.querySelectorAll(".langbrowse");
+      const langsrc = document.querySelector(".langsrc");
+
+      var data = {
+        english: {
+          title: "Add New Record",
+          thesis: "Thesis Management System",
+          search: "Search by monograph title ...",
+          allRecord: "Show All Records",
+          miniTitle: "Title",
+          monoTitle: "Monograph Title",
+          msg: "Please fill Monograph Title",
+          dep: "Department",
+          SE: "SE",
+          IT: "IT",
+          IS: "IS",
+          year: "Year",
+          monoLang: "Monograph Language",
+          EN: "English",
+          FA: "Farsi",
+          PS: "Pashto",
+          upfile: "Upload Monograph File",
+          choose: "Choose file",
+          pdf: "Please Upload Monograph File (.pdf only)",
+          source: "Upload Source Code File",
+          sourcefile: "Please Upload Monograph File (.zip or .rar only)",
+          std1: "* Student #1 Info",
+          KUID: "KU ID#",
+          Fname: "First Name",
+          father: "Father Name",
+          Last: "Last Name",
+          Rec: "Add Record",
+          optional: "(Optional)",
+          std2: "Student #2 Info",
+          std3: "Student #3 Info",
+          Logout: "Logout",
+        },
+        persian: {
+          title: "محتوای جدید",
+          thesis: " سیستم مدیریتی پایان نامه ",
+          search: "جستجو از طریق اسم پایان نامه",
+          allRecord: "نمایش تمام اطلاعات",
+          miniTitle: "عنوان",
+          monoTitle: "عنوان پایان نامه",
+          msg: "لطفا عنوان مونوگراف را درج نمایید",
+          dep: "دیپارتمنت",
+          SE: "انجنيری نرم افزار",
+          IT: "تکنالوژی معلوماتی",
+          IS: "سیستم های معلوماتی",
+          year: "سال",
+          monoLang: "زبان مونوگراف",
+          EN: "انگلیسی",
+          FA: "دری",
+          PS: "پشتو",
+          upfile: "آپلود محتویات پایان نامه",
+          choose: "انتخاب فایل",
+          pdf: "فایل های پایان نامه را وارد کنید (شکل پی دی اف)",
+          source: "آپلود منابع کود شده",
+          sourcefile: "فایل های مربوط را وارد نمایید‌(فقط با پسوند رار یا زیپ)",
+          std1: "معلومات محصل اول *",
+          KUID: "آيدی دانشگاه",
+          Fname: "اسم محصل",
+          father: "ولد",
+          Last: "تخلص",
+          Rec: "اضافه کردن",
+          optional: "(اختیاری)",
+          std2: "معلومات محصل دوم *",
+          std3: "معلومات محصل سوم *",
+          Logout: "خروج از سیستم",
+        },
+      };
+      var attr = localStorage.getItem("language");
+      langAddrecord.textContent = data[attr].title;
+      LangThesis.textContent = data[attr].thesis;
+      langSearch.placeholder = data[attr].search;
+      langAddrecord2.textContent = data[attr].title;
+      langAllrecord.textContent = data[attr].allRecord;
+      Langtitle.textContent = data[attr].miniTitle;
+      langMonoTitle.placeholder = data[attr].monoTitle;
+      langMsg.textContent = data[attr].msg;
+      langDep.textContent = data[attr].dep;
+      langSE.textContent = data[attr].SE;
+      langIT.textContent = data[attr].IT;
+      langIS.textContent = data[attr].IS;
+      LangYear.textContent = data[attr].year;
+      LangMonoLang.textContent = data[attr].monoLang;
+      langEN.textContent = data[attr].EN;
+      langFA.textContent = data[attr].FA;
+      langPS.textContent = data[attr].PS;
+      langpdf.textContent = data[attr].pdf;
+      langsource.textContent = data[attr].source;
+      langsourcefile.textContent = data[attr].sourcefile;
+      langstd1.textContent = data[attr].std1;
+      langKUID[0].placeholder = data[attr].KUID;
+      langKUID[1].placeholder = data[attr].KUID;
+      langKUID[2].placeholder = data[attr].KUID;
+      langFname[0].placeholder = data[attr].Fname;
+      langFname[1].placeholder = data[attr].Fname;
+      langFname[2].placeholder = data[attr].Fname;
+      langfather[0].placeholder = data[attr].father;
+      langfather[1].placeholder = data[attr].father;
+      langfather[2].placeholder = data[attr].father;
+      langLast[0].placeholder = data[attr].Last;
+      langLast[1].placeholder = data[attr].Last;
+      langLast[2].placeholder = data[attr].Last;
+      langRec.textContent = data[attr].Rec;
+      langoptional[0].textContent = data[attr].optional;
+      langoptional[1].textContent = data[attr].optional;
+      langstd2.textContent = data[attr].std2;
+      langstd3.textContent = data[attr].std3;
+      langlogout.textContent = data[attr].Logout;
+      langsrc.textContent = data[attr].source;
+    </script>
   </body>
 </html>

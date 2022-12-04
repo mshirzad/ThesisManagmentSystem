@@ -184,31 +184,28 @@ class addRecord(viewsets.GenericViewSet,
             self.perform_create(serializer)
             headers=self.get_success_headers(serializer.data)
 
-            details = {'target_file': '',
-                        'similar with': '',
-                        'similarity score':''}
-
+            details = {}
+            i = 0
             for i in range(0, len(plagiarism_result)):
-                details = {f'{i}target_file': str(plagiarism_result[i][0]),
-                            f'{i}similar with': plagiarism_result[i][1],
-                            f'{i}similarity score': plagiarism_result[i][2]}
+                details.update([(f'{i}target_file', str(plagiarism_result[i][0])),
+                            (f'{i}similar with', plagiarism_result[i][1]),
+                            (f'{i}similarity score', plagiarism_result[i][2])])
 
             json.dumps(details)
             combined_data = merge(serializer.data, details)
             return Response(combined_data, status=status.HTTP_201_CREATED, headers=headers)
 
-        else:
+        elif pal_score > 0.8:
             print("inside else")
-            details = {'target_file': '',
-                        'similar with': '',
-                        'similarity score':''}
-
+            details = {}
+            i = 0
             for i in range(0, len(plagiarism_result)):
-                details = {f'{i}target_file': str(plagiarism_result[i][0]),
-                            f'{i}similar with': plagiarism_result[i][1],
-                            f'{i}similarity score': plagiarism_result[i][2]}
+                details.update([(f'{i}target_file', str(plagiarism_result[i][0])),
+                            (f'{i}similar with', plagiarism_result[i][1]),
+                            (f'{i}similarity score', plagiarism_result[i][2])])
 
             json.dumps(details)
+            print(details)
             return Response(details, status=status.HTTP_400_BAD_REQUEST)
 
 

@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Home</title>
+    <title class="langTitle">Home</title>
 
     <link
       rel="shortcut icon"
@@ -22,36 +22,38 @@
       rel="stylesheet"
       href="{% static 'main/css/jquery.modal.min.css' %}"
     />
-
     <script src="{% static 'main/js/show_record.js' %}" defer></script>
-
     <script src="{% static 'main/js/jquery.js' %}" defer></script>
     <script
       src="{% static 'main/js/bootstrap/bootstrap.min.js' %}"
       defer
     ></script>
-
     <script src="{% static 'main/js/jquery.modal.min.js' %}" defer></script>
     <script src="{% static 'main/js/index.js' %}" defer></script>
   </head>
+
   <body>
     <header
       class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow"
     >
-      <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#"
+      <a class="LangThesis navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#"
         >Thesis Management System</a
       >
       <input
-        class="form-control form-control-dark w-100"
+        class="langSearch form-control form-control-dark w-100"
         type="text"
         placeholder="Search by monograph title ..."
         aria-label="Search"
         id="search-key"
         oninput="searchLive()"
       />
+      <a href="#" language="english" class="btn btn-outline-secondary m-2"
+        >EN</a
+      >
+      <a href="#" language="persian" class="btn btn-outline-secondary">دری</a>
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-          <a class="nav-link" href="logout/">Logout</a>
+          <a class="langLogout nav-link" href="logout/">Logout</a>
         </li>
       </ul>
     </header>
@@ -62,12 +64,12 @@
           <div
             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
           >
-            <h1 class="h2">All Records</h1>
+            <h1 class="langAllrecords h2">All Records</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group me-2">
                 <a
                   href="{% url 'addNewRecord' %}"
-                  class="btn btn-sm btn-outline-secondary"
+                  class="langAddrecord btn btn-sm btn-outline-secondary"
                 >
                   Add New Record
                 </a>
@@ -78,7 +80,9 @@
             <table class="table table-striped table-sm" id="records-table">
               <thead>
                 <tr>
-                  <th style="width: 600px; max-width: 600px">Filters</th>
+                  <th class="langfilter" style="width: 600px; max-width: 600px">
+                    Filters
+                  </th>
                   <th style="width: 150px; max-width: 150px">
                     <select id="date-dropdown" class="form-control mr-1">
                       <option value="1399">1399</option>
@@ -102,9 +106,9 @@
                       id="department"
                       class="form-control mr-1"
                     >
-                      <option value="SE">SE</option>
-                      <option value="IT">IT</option>
-                      <option value="IS">IS</option>
+                      <option value="SE" class="langSE">SE</option>
+                      <option value="IT" class="langIT">IT</option>
+                      <option value="IS" class="langIS">IS</option>
                     </select>
                   </th>
                   <th style="width: 150px; max-width: 150px">
@@ -113,26 +117,54 @@
                       id="langDropdown"
                       class="form-control mr-1"
                     >
-                      <option value="EN">EN</option>
-                      <option value="FA">FA</option>
-                      <option value="PS">PS</option>
+                      <option value="EN" class="langEN">EN</option>
+                      <option value="FA" class="langFA">FA</option>
+                      <option value="PS" class="langPS">PS</option>
                     </select>
                   </th>
                   <th class="pl-4" style="width: 150px; max-width: 150px"></th>
-                  <th class="pl-5" style="width: 150px; max-width: 150px"></th>
+                  <th class="pl-5" style="width: 150px; max-width: 150px">
+                    <button
+                      class="form-control btn btn-sm btn-outline-secondary mr-1"
+                      id="clearFilters"
+                      onclick="window.location.reload()"
+                    >
+                      Clear Filters
+                    </button>
+                  </th>
                 </tr>
                 <tr>
                   {% comment %}
                   <th>Monograph ID</th>
                   {% endcomment %}
-                  <th style="width: 600px; max-width: 600px">Title</th>
-                  <th style="width: 150px; max-width: 150px">Year</th>
-                  <th style="width: 150px; max-width: 150px">Department</th>
-                  <th style="width: 150px; max-width: 150px">Language</th>
-                  <th class="pl-4" style="width: 200px; max-width: 200px">
+                  <th
+                    class="langTabletitle"
+                    style="width: 600px; max-width: 600px"
+                  >
+                    Title
+                  </th>
+                  <th class="langYear" style="width: 150px; max-width: 150px">
+                    Year
+                  </th>
+                  <th class="langdep" style="width: 150px; max-width: 150px">
+                    Department
+                  </th>
+                  <th
+                    class="langlanguage"
+                    style="width: 150px; max-width: 150px"
+                  >
+                    Language
+                  </th>
+                  <th
+                    class="langView pl-4"
+                    style="width: 200px; max-width: 200px"
+                  >
                     View Record
                   </th>
-                  <th class="pl-5" style="width: 200px; max-width: 200px">
+                  <th
+                    class="langopen pl-5"
+                    style="width: 200px; max-width: 200px"
+                  >
                     Open File
                   </th>
                 </tr>
@@ -150,5 +182,118 @@
 
       <a href="#" rel="modal:close">Close</a>
     </div>
+
+    <script>
+      let localStorageHandler = (data = "persian") => {
+        localStorage.setItem("language", `${data}`);
+      };
+      localStorageHandler("english");
+      const titleEl = document.querySelector(".langTitle");
+      const LangThesis = document.querySelector(".LangThesis");
+      const langSearch = document.querySelector(".langSearch");
+      const langLogout = document.querySelector(".langLogout");
+      const langAllrecords = document.querySelector(".langAllrecords");
+      const langAddrecord = document.querySelector(".langAddrecord");
+      const langTabletitle = document.querySelector(".langTabletitle");
+      const langSE = document.querySelector(".langSE");
+      const langIT = document.querySelector(".langIT");
+      const langIS = document.querySelector(".langIS");
+      const langEN = document.querySelector(".langEN");
+      const langFA = document.querySelector(".langFA");
+      const langPS = document.querySelector(".langPS");
+      const langViewRecord = document.querySelector(".langViewRecord");
+      const langMonoOpen = document.querySelector(".langMonoOpen");
+      const langfilter = document.querySelector(".langfilter");
+      const langYear = document.querySelector(".langYear");
+      const langView = document.querySelector(".langView");
+      const langdep = document.querySelector(".langdep");
+      const langlanguage = document.querySelector(".langlanguage");
+      const langopen = document.querySelector(".langopen");
+
+      const html = document.getElementsByTagName("html");
+      const link = document.querySelectorAll("a");
+      var attr = "";
+
+      link.forEach((el) => {
+        el.addEventListener("click", () => {
+          attr = el.getAttribute("language");
+          if (attr == "english") {
+            localStorageHandler("english");
+          } else if (attr == "persian") {
+            localStorageHandler("persian");
+          }
+          titleEl.textContent = data[attr].title;
+          LangThesis.textContent = data[attr].thesis;
+          langSearch.placeholder = data[attr].search;
+          langLogout.textContent = data[attr].logout;
+          langAllrecords.textContent = data[attr].allrecords;
+          langAddrecord.textContent = data[attr].addRecord;
+          langTabletitle.textContent = data[attr].tableTitle;
+          langSE.textContent = data[attr].SE;
+          langIT.textContent = data[attr].IT;
+          langIS.textContent = data[attr].IS;
+          langEN.textContent = data[attr].EN;
+          langFA.textContent = data[attr].FA;
+          langPS.textContent = data[attr].PS;
+          langfilter.textContent = data[attr].filter;
+          langYear.textContent = data[attr].year;
+          langView.textContent = data[attr].view;
+          langdep.textContent = data[attr].dep;
+          langlanguage.textContent = data[attr].language;
+          langopen.textContent = data[attr].open;
+        });
+      });
+
+      var data = {
+        english: {
+          title: "Home",
+          records: "All Records",
+          thesis: "Thesis Management System",
+          search: "Search by monograph title ...",
+          logout: "Logout",
+          allrecords: "All Records",
+          addRecord: "Add New Record",
+          tableTitle: "Title",
+          SE: "SE",
+          IT: "IT",
+          IS: "IS",
+          EN: "EN",
+          FA: "FA",
+          PS: "PS",
+          viewRecord: " View Record ",
+          monoOpen: "Open Monograph ",
+          filter: "Filters",
+          year: "Year",
+          view: "View Record",
+          dep: "Department",
+          language: "Language",
+          open: "Open File",
+        },
+        persian: {
+          title: "صفحه اصلی",
+          thesis: " سیستم مدیریتی پایان نامه ",
+          search: "جستجو از طریق اسم پایان نامه",
+          logout: "خروج از سیستم",
+          allrecords: "تمام محتویات",
+          addRecord: "محتوای جدید",
+          tableTitle: "عنوان",
+          SE: "انجنيری نرم افزار",
+          IT: "تکنالوژی معلوماتی",
+          IS: "سیستم های معلوماتی",
+          EN: "انگلیسی",
+          FA: "دری",
+          PS: "پشتو",
+          viewRecord: "نمایش اطلاعات",
+          monoOpen: "نمایش پایان نامه",
+          filter: "فلتر ها",
+          year: "سال",
+          view: "نمایش ریکارد",
+          dep: "دیپارتمنت",
+          language: "زبان",
+          open: "باز کردن فایل",
+        },
+      };
+    </script>
+    <!-- <script src="{% static 'main/js/indexLang.js' %}"></script> -->
   </body>
 </html>

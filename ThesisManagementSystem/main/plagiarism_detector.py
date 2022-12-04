@@ -35,7 +35,7 @@ def check_plagiarism(target, monographs_list):
                 for sample_b, text_vector_b in new_vectors:
                     sim_score = similarity(text_vector_a, text_vector_b)[0][1]
                     score = sample_a, sample_b, sim_score
-                    if sim_score >= 0.25:
+                    if sim_score >= 0.3:
                         results.add(score)
                         
         return results

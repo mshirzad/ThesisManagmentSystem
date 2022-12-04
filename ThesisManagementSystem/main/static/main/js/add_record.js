@@ -89,26 +89,26 @@ function addNewMonographRecord() {
             }
           }
           console.log(data);
+          const keys = Object.keys(data);
+          console.log(keys);
+          if (keys.includes("0target_file")) {
+            showPartialPal(data);
+          }
         }
         if (response.status == 400) {
           // console.log(response.status, data);
           loadingAnimation("hide");
           console.log(data);
-          showError(
-            data["0target_file"],
-            data["0similarity score"],
-            data["0similar with"]
-          );
+          showError(data);
         } else {
           loadingAnimation("hide");
           // console.log(data);
-          // showDBError(data);
         }
       })
     )
     .catch((error) => {
       loadingAnimation("hide");
-      showDBError(error);
+      console.log(error);
     });
 }
 
@@ -133,16 +133,18 @@ function addNewStudent(mID, rawData, s_formData, s_number) {
         // console.log(response.status);
         if (response.ok) {
           showSuccess(mID);
-          if (data["0target_file"] != "undefined") {
+          const keys = Object.keys(data);
+          console.log(keys);
+          if (keys.includes("0target_file")) {
             showPartialPal(data);
           }
         } else {
           // console.log(data);
-          // showDBError(data);
+          // console.log(data);
         }
       })
     )
-    .catch((error) => showDBError(error));
+    .catch((error) => console.log(error));
 }
 
 function showSuccess(mID) {
@@ -155,30 +157,71 @@ function showSuccess(mID) {
 }
 
 function showPartialPal(data) {
-  target = data["0target_file"];
-  score = Math.round(data["0similarity score"]);
-  similarFile = data["0similar with"].slice(-57);
-  sFilePath = "http://127.0.0.1:8000/" + similarFile;
-
+  console.log("partial called");
+  total_pal_score = 0;
   warningBox.innerHTML = `
-  <strong>Partially Plagiarism Detected</strong> <br>
-    ${target} is <strong> ${score * 100} % </strong>  similar with 
-            <a href="${sFilePath}" class="alert-link" target="_blank">This Monograph</a>. 
-    `;
+  <strong>Partially Plagiarism Detected</strong>`;
+
+  dataLen = Object.keys(data).length;
+  for (let i = 0; i < (dataLen - 10) / 3; i++) {
+    // score = Math.round(data[`${i}similarity score`], 3);
+
+    score = Math.trunc(data[`${i}similarity score`] * 100);
+
+    console.log(score);
+    total_pal_score = total_pal_score + score;
+    console.log(data[`${i}similar with`]);
+    similarFile = data[`${i}similar with`].slice(-57);
+    sFilePath = "http://127.0.0.1:8000/" + similarFile;
+
+    resultDiv = document.createElement("div");
+    resultDiv.innerHTML = `
+    
+    ${data["0target_file"]} is <strong> ${score}% </strong>  similar with 
+            <a href="${sFilePath}" class="alert-link" target="_blank">This Monograph</a>.`;
+  }
+
+  total_pal_score = total_pal_score / ((dataLen - 10) / 3);
+  totalPal = document.createElement("strong");
+  totalPal.innerHTML = `<strong> Average Plagiarism Detected: ${total_pal_score}% with ${
+    (dataLen - 10) / 3
+  }  Files</strong>`;
+  warningBox.append(totalPal);
+
   warningBox.style.display = "block";
 }
-
-function showError(target, score, similarFile) {
-  score = Math.round(score);
-
-  similarFile = similarFile.slice(-57);
-  sFilePath = "http://127.0.0.1:8000/" + similarFile;
-
+function showError(data) {
+  total_pal_score = 0;
   errorAlertBox.innerHTML = `
-  <strong>Plagiarism Detected</strong> <br>
-    ${target} is <strong> ${score * 100} % </strong>  similar with 
-            <a href="${sFilePath}" class="alert-link" target="_blank">This Monograph</a>. 
-    `;
+  <strong>Plagiarism Detected</strong>`;
+
+  dataLen = Object.keys(data).length;
+  for (let i = 0; i < dataLen / 3; i++) {
+    // score = Math.round(data[`${i}similarity score`], 3);
+
+    score = Math.trunc(data[`${i}similarity score`] * 100);
+
+    console.log(score);
+    total_pal_score = total_pal_score + score;
+    console.log(data[`${i}similar with`]);
+    similarFile = data[`${i}similar with`].slice(-57);
+    sFilePath = "http://127.0.0.1:8000/" + similarFile;
+
+    resultDiv = document.createElement("div");
+    resultDiv.innerHTML = `
+    
+    ${data["0target_file"]} is <strong> ${score}% </strong>  similar with 
+            <a href="${sFilePath}" class="alert-link" target="_blank">This Monograph</a>.`;
+
+    errorAlertBox.append(resultDiv);
+  }
+  total_pal_score = total_pal_score / (dataLen / 3);
+  totalPal = document.createElement("strong");
+  totalPal.innerHTML = `<strong> Average Plagiarism Detected: ${total_pal_score}% with ${
+    dataLen / 3
+  }  Files</strong>`;
+  errorAlertBox.append(totalPal);
+
   errorAlertBox.style.display = "block";
 }
 

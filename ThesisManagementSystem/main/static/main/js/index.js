@@ -646,6 +646,7 @@ function showDeleteSuccess() {
 const langDropdown = document.getElementById("langDropdown");
 const departmentDropdown = document.getElementById("department");
 const dateDropdown = document.getElementById("date-dropdown");
+const clearFilters = document.getElementById("clearFilters");
 
 function searchLive() {
   const searchKey = document.getElementById("search-key").value;
