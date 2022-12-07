@@ -134,7 +134,6 @@ function addNewStudent(mID, rawData, s_formData, s_number) {
         if (response.ok) {
           showSuccess(mID);
           const keys = Object.keys(data);
-          console.log(keys);
           if (keys.includes("0target_file")) {
             showPartialPal(data);
           }
@@ -164,13 +163,8 @@ function showPartialPal(data) {
 
   dataLen = Object.keys(data).length;
   for (let i = 0; i < (dataLen - 10) / 3; i++) {
-    // score = Math.round(data[`${i}similarity score`], 3);
-
     score = Math.trunc(data[`${i}similarity score`] * 100);
-
-    console.log(score);
     total_pal_score = total_pal_score + score;
-    console.log(data[`${i}similar with`]);
     similarFile = data[`${i}similar with`].slice(-57);
     sFilePath = "http://127.0.0.1:8000/" + similarFile;
 
@@ -179,6 +173,8 @@ function showPartialPal(data) {
     
     ${data["0target_file"]} is <strong> ${score}% </strong>  similar with 
             <a href="${sFilePath}" class="alert-link" target="_blank">This Monograph</a>.`;
+
+    warningBox.append(resultDiv);
   }
 
   total_pal_score = total_pal_score / ((dataLen - 10) / 3);
@@ -186,6 +182,7 @@ function showPartialPal(data) {
   totalPal.innerHTML = `<strong> Average Plagiarism Detected: ${total_pal_score}% with ${
     (dataLen - 10) / 3
   }  Files</strong>`;
+
   warningBox.append(totalPal);
 
   warningBox.style.display = "block";
@@ -217,9 +214,9 @@ function showError(data) {
   }
   total_pal_score = total_pal_score / (dataLen / 3);
   totalPal = document.createElement("strong");
-  totalPal.innerHTML = `<strong> Average Plagiarism Detected: ${total_pal_score}% with ${
-    dataLen / 3
-  }  Files</strong>`;
+  totalPal.innerHTML = `<strong> Average Plagiarism Detected: ${Math.round(
+    total_pal_score
+  )}% with ${dataLen / 3}  Files</strong>`;
   errorAlertBox.append(totalPal);
 
   errorAlertBox.style.display = "block";
